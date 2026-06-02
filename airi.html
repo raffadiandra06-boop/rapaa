@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khusus Untuk Airi 🌸</title>
+    <style>
+        /* Tema Warna Waguri Kaoruko: Pastel, Kue, & Bunga */
+        :root {
+            --bg-color: #FFF5F5;
+            --primary-pink: #FFB7B2;
+            --dark-pink: #FF8B94;
+            --cream: #FFDAC1;
+            --text-color: #6C5B7B;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 139, 148, 0.2);
+            max-width: 400px;
+            width: 90%;
+            transition: all 0.5s ease;
+        }
+
+        h1 {
+            color: var(--dark-pink);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Elemen Estetik / Anime Vibes */
+        .kaoruko-icon {
+            font-size: 4rem;
+            animation: float 3s ease-in-out infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Tombol */
+        .btn {
+            background-color: var(--primary-pink);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 183, 178, 0.4);
+        }
+
+        .btn:hover {
+            background-color: var(--dark-pink);
+            transform: scale(1.05);
+        }
+
+        /* Halaman Surat (Hidden Default) */
+        .hidden {
+            display: none;
+        }
+
+        .letter-box {
+            text-align: left;
+            background: #FFF9F9;
+            border-left: 4px solid var(--dark-pink);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        /* Bagian Tombol Interaktif */
+        .btn-group {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        #btn-no {
+            background-color: #E2E8F0;
+            color: #64748B;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HALAMAN 1: WELCOME (TEMA KAORUKO) -->
+    <div id="page1" class="container">
+        <div class="kaoruko-icon">🍰🌸</div>
+        <h1>Halo, Airi-ku Sayang!</h1>
+        <p>Ada sebuah pesan manis yang dipanggang dengan penuh rasa cinta khusus buat kamu hari ini. Mau buka?</p>
+        <button class="btn" onclick="bukaSurat()">Buka Surat ✨</button>
+    </div>
+
+    <!-- HALAMAN 2: SURAT ROMANTIS & PERTANYAAN -->
+    <div id="page2" class="container hidden">
+        <div class="kaoruko-icon">💝</div>
+        <h1>Untuk Airi Terkasih...</h1>
+        
+        <div class="letter-box">
+            "Seperti Kaoruko yang selalu membawa kehangatan dan senyuman manis lewat kue-kue buatannya, kehadiran kamu di hidupku jauh lebih manis dari itu. Kamu adalah alasan di balik setiap hal baik yang aku rasakan hari ini.<br><br>
+            Aku bersyukur bisa mengenalmu, menyayangimu, dan berjalan di sampingmu. Tetaplah jadi Airi yang aku kenal—yang senyumnya selalu bisa meruntuhkan semua dinding egoku. I love you, today, tomorrow, and unexpected forever."
+        </div>
+
+        <p><strong>By the way, mau gak akhir pekan ini kita nge-date bareng? 🍦</strong></p>
+        
+        <div class="btn-group">
+            <button id="btn-yes" class="btn" onclick="terimaDate()">Mau Banget! 🥰</button>
+            <button id="btn-no" class="btn" onmouseover="hindariTombol()">Nggak Mau 😜</button>
+        </div>
+    </div>
+
+    <!-- HALAMAN 3: JIKA SAY "YES" -->
+    <div id="page3" class="container hidden">
+        <div class="kaoruko-icon">🎉✨💖</div>
+        <h1>Yayyy! See You!</h1>
+        <p>Keputusan yang sangat tepat! Aku bakal persiapkan kencan terbaik ala toko kue kesukaan Kaoruko buat kita berdua. I love you so much, Airi! 😘</p>
+    </div>
+
+    <script>
+        function bukaSurat() {
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('page2').classList.remove('hidden');
+        }
+
+        function terimaDate() {
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById('page3').classList.remove('hidden');
+            createHearts(); // Efek hujan hati
+        }
+
+        // Fungsi usil: Tombol "Nggak Mau" akan lari kalau didekati kursor
+        function hindariTombol() {
+            const btnNo = document.getElementById('btn-no');
+            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth - 50);
+            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight - 50);
+            
+            btnNo.style.position = 'absolute';
+            btnNo.style.left = x + 'px';
+            btnNo.style.top = y + 'px';
+        }
+
+        // Efek Hujan Hati ala anime romance
+        function createHearts() {
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '🌸';
+                heart.style.position = 'fixed';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '-10px';
+                heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+                heart.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+                document.body.appendChild(heart);
+
+                setTimeout(() => { heart.remove(); }, 5000);
+            }
+        }
+
+        // Gaya tambahan untuk animasi hati jatuh
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fall {
+                to {
+                    transform: translateY(100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
